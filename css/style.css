@@ -3,6 +3,7 @@ header {
     text-align: center;
     font-size: 50px;
     font-weight: bold;
+    padding: 0 20px 20px 20px;
 }
 
 nav {
@@ -14,11 +15,22 @@ nav {
 }
 
 nav ul {
-  float: left;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li.contact-link {
+    margin-left: auto;
 }
 
 nav ul a {
-  display: inline-block;
+  display: block;
   color: white;
   text-align: center;
   padding: 15px 40px;
@@ -27,11 +39,13 @@ nav ul a {
 }
 
 nav ul a:hover {
-  background-color: rgb(5, 129, 86);
+  background-color: rgb(5, 129, 32);
+  color: white;
+  font-weight: bold;
 }
 
 body {
-    background-color: rgb(247, 240, 149);
+    background-color: white;
     margin: 20px;
     padding: 20px;
 }
@@ -61,7 +75,7 @@ li a {
 
 li a:hover {
     background-color: rgb(249, 149, 228);
-    color: black;
+    color: white;
 }
 
 footer p {
