@@ -4,9 +4,10 @@ header {
     font-size: 50px;
     font-weight: bold;
 }
+
 nav {
     list-style-type: none;
-    margin: 0;
+    margin: auto;
     padding: 0;
     overflow: hidden;
     background-color: #3095c7;
@@ -22,34 +23,33 @@ nav ul a {
   text-align: center;
   padding: 15px 40px;
   text-decoration: none;
+  font-size: 18px;
 }
 
 nav ul a:hover {
-  background-color: #111111;
+  background-color: rgb(5, 129, 86);
 }
 
 body {
-    background-color: white;
+    background-color: rgb(247, 240, 149);
+    margin: 20px;
+    padding: 20px;
 }
 
-h1 {
+h1, h2 {
     color: black;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h2 {
-    color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+section {
+    display: flex;
 
-p {
-    color: black;
 }
 
 ul {
-    list-style-type: none;
     margin: 0;
     padding: 0;
+    list-style-type: none;
 }
 
 li a {
@@ -60,15 +60,11 @@ li a {
 }
 
 li a:hover {
-    background-color: rgb(132, 0, 255);
-    color: white;
+    background-color: rgb(249, 149, 228);
+    color: black;
 }
 
-.active {
-    background-color: #04AA6D;
-    color: white;
-}
-
-footer {
-    justify-content: center;
+footer p {
+    text-align: center;
+    color: black;
 }
