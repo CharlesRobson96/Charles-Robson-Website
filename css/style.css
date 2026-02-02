@@ -7,11 +7,18 @@ header {
 }
 
 nav {
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
+    position: sticky;
+    top: 10px; 
+    z-index: 1000;
+
     background-color: #3095c7;
+    border-radius: 12px;
+    margin: 0 auto 20px auto;
+    max-width: 1200px;
+
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    overflow: hidden;
+    
 }
 
 nav ul {
@@ -23,6 +30,7 @@ nav ul {
 
 nav ul li {
     list-style: none;
+    padding: 4px;
 }
 
 nav ul li.contact-link {
@@ -30,12 +38,14 @@ nav ul li.contact-link {
 }
 
 nav ul a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 15px 40px;
-  text-decoration: none;
-  font-size: 18px;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
 }
 
 nav ul a:hover {
