@@ -1,10 +1,10 @@
 :root {
     /* Core palette */
-    --bg: #F7F7F5;          /* off-white background */
-    --text: #1E1E1E;        /* charcoal text */
-    --muted: #6B6B6B;       /* secondary text */
-    --divider: #E0E0E0;     /* borders/dividers */
-    --accent: #B00020;      /* engineering red */
+    --bg: #F7F7F5;
+    --text: #1E1E1E;
+    --muted: #6B6B6B;
+    --divider: #E0E0E0;
+    --accent: #B00020;
 
     /* UI surfaces */
     --nav-bg: #101647;
