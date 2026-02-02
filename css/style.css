@@ -93,6 +93,25 @@ footer p {
     color: black;
 }
 
+.footer-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.footer-social img {
+    height: 25px;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.footer-social img:hover {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 4px rgba(0, 55, 220, 0.9));
+}
+
 .post-container {
     max-width: 900px;
     margin: 0 auto;
