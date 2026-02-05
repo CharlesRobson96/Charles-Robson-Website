@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Post Title | The Unassuming Engineer</title>
+    <title>Model Aggregation | The Insightful Engineer</title>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
 
-<header>The Unassuming Engineer</header>
+<header>The Insightful Engineer</header>
 
 <nav>
     <ul>
@@ -21,84 +21,105 @@
 
 <main class="post-container">
 
-    <!-- Post header -->
     <article>
         <header class="post-header">
-            <h1>Post Title Goes Here</h1>
+            <h1>Model Aggregation</h1>
             <p class="post-meta">
-                Category: Grid Connections · Published: 12 March 2026
+                Author: C. Robson · Category: Grid Connections · Published: 12 March 2026
             </p>
         </header>
 
-        <!-- Intro -->
-        <section class="post-intro">
-            <p>
-                In this post, I break down <strong>what this topic is</strong>, 
-                <strong>why it matters</strong>, and <strong>how I think about it in practice</strong>.
-                This isn’t a textbook explanation — it’s the reasoning process I use when solving
-                real engineering problems.
-            </p>
-        </section>
+        <p>
+            In this post, I will break down what model aggregation is, why it matters, and how I to do it.
+            I will also dive into the assumptions used to create the model, and when these break down i.e. when
+            you cannot use the model. 
+        </p>
 
-        <!-- What you'll learn -->
-        <section>
-            <h2>What you’ll learn</h2>
+        <p>
+            The main reason for aggregating models is so that complex simulations can be numerically simplified. 
+            Depending on the size of the model, this reduction greatly decreases compute time. This has obvious 
+            advantages. There are other advantages such as model stability, increased protection of OEM control 
+            systems, and more. 
+        </p>
+
+        <h2>The Basics</h2>
+        <p>
+            Model aggregation always completed at the start of a connection progress. In the R0 stage, it is not uncommon 
+            to be verbally told how the generating plant's equipment will connect. That said, you are more likely to get 
+            half-baked single line diagrams that will change at least once while you're going through the aggregated model's 
+            validation process.
+        </p>
+
+        <p>
+            I start by creating the disaggregated model in DIgSILENT's PowerFactory. PowerFactory is used for creating and running 
+            the disaggregated model as it doesn't need OEM controllers to run. Simple active and reactive power controllers 
+            can be made to control P and Q at the point of connection. After you have made the disaggregated model, it's 
+            time to decide what you are going to aggregate. Typically, the collector networks are aggregated. The number 
+            of aggregate parameters dependends on: 
             <ul>
-                <li>What the problem actually is (not just the definition)</li>
-                <li>Where people usually get confused</li>
-                <li>How I approach it step by step</li>
-                <li>Common traps and bad assumptions</li>
-            </ul>
-        </section>
+                <li>Number of main power/park transformers.</li>
+                <li>Whether the site is hybrid or not.</li>
+                <li>Controller used within the park.</li>
+                <li>Size of inverter/units.</li>
+            </ul> 
+        </p>
 
-        <!-- Main content -->
-        <section>
-            <h2>The core concept</h2>
-            <p>
-                Start with the intuition first. Explain it in plain language.
-                Assume the reader is smart, but missing context.
-            </p>
+        <p>
+            Generally speaking you want to aggregate all the similar parts of the plant. You do this because when elements 
+            are similar they behave similiary and consequently your aggregate model becomes more accurate! Here are some 
+            examples of how you'd aggregate models.  
+        </p>
 
-            <p>
-                Use equations, diagrams, or examples only after the idea is grounded.
-                If something is an approximation, say so.
-            </p>
-        </section>
+        <figure>
+                <img src="images/Model-Aggregation/" alt="Aggregating Models">
+        </figure>
 
-        <section>
-            <h2>How this shows up in real projects</h2>
-            <p>
-                This is where you connect theory to practice — grid studies, modelling,
-                commissioning, scripting, or mistakes you’ve seen in the wild.
-            </p>
-        </section>
 
-        <section>
-            <h2>Common mistakes I see</h2>
+        <h2>Aggregate Theory</h2>
+        <p>
+            You can aggregate your model in two ways; using first principals or by running a bunch of load flows. 
+            Using first principals is tedious and relies on you remembering the circuit theory you were taught in university
+            many years ago. The other draw-back to using the first principals method is that it becomes less accurate when the 
+            plant contains long lines. The more common method used for aggregating is to run a number of load flows at varying 
+            operating conditions and create what is essentially an electrical losses model. 
+        </p>
+
+        <p>
+            The parameters you calculate should describe how the plant will lose power through it's collector network. By
+            calculating parameters based on the losses over a number of operating conditions, you are essentially taking the 
+            average of the plant's losses and calculating the resistance and reactance of a single equivalent cable. This post 
+            will explain how aggregated parameters are calculated using load flows. 
+        </p>
+
+        <h2>Getting Started</h2>
+
+        <p>
+            You now know why, and you know a bit about the science behind the methods used, but how do you actually aggregate a 
+            model? Start by dispatching your plant. Any dispatch conditions will do but standardising is always the way to go.
+            Most NSPs do not have any requirements on how to aggregate, however, PowerLink Queensland do state a few operating conditions
+            and general rules to know if you aggregation was successful. That said I aggregate my models using conditions below: 
             <ul>
-                <li>Assuming X when Y actually matters</li>
-                <li>Blindly trusting software outputs</li>
-                <li>Applying standards without understanding intent</li>
+                <li>Grid Voltage: 0.9 p.u., 1.0 p.u., and 1.1 p.u.</li>
+                <li>Active Power Setpoint: 0 p.u. (BESS only), 0.5 p.u., 1.0 p.u., and -1.0 p.u. (BESS only)</li>
+                <li>Reactive Power Setpoint: -1.0 p.u., 0 p.u., and 1.0 p.u.,</li>
             </ul>
-        </section>
+        </p>
+
+        <h2>The Math</h2>
+
+        <p>
+            Once you have run the load flow. Check the POC condition to confirm they are as you expect. If they are not, commons errors
+            are typically 
+        </p>
+
 
         <!-- Takeaway -->
         <section class="post-takeaway">
             <h2>Key takeaway</h2>
             <p>
-                Summarise the post in 2–3 sentences.  
+                Summarise the post in 2 - 3 sentences.  
                 If the reader remembers nothing else, this is what should stick.
             </p>
-        </section>
-
-        <!-- Optional extras -->
-        <section class="post-notes">
-            <h3>Assumptions & notes</h3>
-            <ul>
-                <li>Balanced system assumed unless stated otherwise</li>
-                <li>Steady-state conditions</li>
-                <li>Australian NEM context</li>
-            </ul>
         </section>
 
     </article>
