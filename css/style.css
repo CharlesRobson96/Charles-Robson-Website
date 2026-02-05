@@ -55,7 +55,7 @@ a:hover {
 
 nav {
     position: sticky;
-    top: 100px; /* adjust if header height changes */
+    top: 100px;
     z-index: 1000;
 
     background-color: var(--nav-bg);
@@ -154,6 +154,7 @@ footer p {
 }
 
 .post-header h1 {
+    font-size: 50px;
     margin-bottom: 5px;
 }
 
