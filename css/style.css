@@ -5,6 +5,7 @@
     --muted: #6B6B6B;
     --divider: #E0E0E0;
     --accent: #B00020;
+    --figcap: #696969;
 
     /* UI surfaces */
     --nav-bg: #101647;
@@ -179,4 +180,22 @@ article section {
     border-left: 5px solid var(--accent);
     box-shadow: var(--shadow);
     border-radius: 12px;
+}
+
+figure {
+    margin: 2rem auto;
+    text-align: centre;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--figcap-colour);
+    text-align: center;
+    font-style: italic;
 }
