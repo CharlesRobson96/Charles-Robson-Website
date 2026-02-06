@@ -199,3 +199,14 @@ figure figcaption {
     text-align: center;
     font-style: italic;
 }
+
+.dotpoint-list {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-left: 3rem;
+    margin: 1rem 0;
+}
+
+.dotpoint-list li {
+    margin-bottom: 0.4rem;
+}
