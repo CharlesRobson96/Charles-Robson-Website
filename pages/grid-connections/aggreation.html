@@ -60,13 +60,15 @@
         <p>
             The number of aggregate parameters heavily dependends on: 
         </p>
+
+        <p>
             <ul class="dotpoint-list">
                 <li>Number of main power/park transformers.</li>
                 <li>Whether the site is hybrid or not.</li>
                 <li>Controller used within the park.</li>
                 <li>Size of inverter/units.</li>
             </ul> 
-        
+        </p>
 
         <p>
             Generally speaking you want to aggregate all the similar parts of the plant. You do this because when elements 
@@ -109,14 +111,14 @@
         <figure>
                 <img 
                     src = "..\..\images\Model-Aggregation\Aggregation-1.png" 
-                    alt = "Aggregation variation 1">
+                    alt = "Stylised single phase diagram showing aggregation variations">
                 <figcaption>Figure 2: Aggregation Variations 1 and 2</figcaption>
         </figure>
 
         <figure>
                 <img 
                     src = "..\..\images\Model-Aggregation\Aggregation-2.png" 
-                    alt = "Aggregation variation 2">
+                    alt = "Stylised single phase diagram showing aggregation more variations">
                 <figcaption>Figure 3: Aggregation Variations 3 and 4</figcaption>
         </figure>
 
@@ -126,19 +128,21 @@
             You now know why, and you know a bit about the science behind the methods used, but how do you actually aggregate a 
             model? Start by dispatching your plant. Any dispatch conditions will do but standardising is always the way to go.
             Most NSPs do not have any requirements on how to aggregate, however, PowerLink Queensland do have a few operating conditions
-            and general rules that you will need to follow. That said, the below is broadly accepted across Australia. 
+            and general rules that you will need to follow. That said, below is broadly accepted across most NSPs in Australia. 
         </p>
 
         <p>
             Operating conditions I use for aggregation: 
         </p>
 
+        <p>
             <ul class="dotpoint-list">
                 <li><strong>Grid Voltage</strong>: 0.9 p.u., 1.0 p.u., and 1.1 p.u.</li>
-                <li><strong>Reactive Power Setpoint</strong>: -1.0 p.u., 0 p.u., and 1.0 p.u.,</li>
+                <li><strong>Reactive Power Setpoint</strong>: -1.0 p.u., 0 p.u., and 1.0 p.u.</li>
                 <li><strong>Active Power Setpoint</strong>: 0.05 p.u., 0.5 p.u., and 1.0 p.u.</li>
                 <li><strong>Active Power Setpoint (BESS)</strong>: -1.0 p.u., 0.0 p.u., and 1.0 p.u.</li>
             </ul>
+        </p>
 
         <p>
             Having other other equipment such as capacitors, filters, STATCOMS, etc in service for the aggregation is not necessary. 
@@ -147,14 +151,39 @@
             important to have the main power transformers tap controller modelled. If you do not model it, you will need to pay 
             particular attention to the tap that the loadflows are solved in so that validation of your parameters can be confirmed.
         </p>
-        
+
         <h2>The Math</h2>
 
         <p>
-            Once you have set up the conditions and run the load flow. Check the POC and confirm the values you are seeing are what you expect.
-
+            Once you have configured the model and run the load flow. Check the POC and confirm the values you are seeing are what you expect.
+            In this example, I have dispatched my plant at 100 MW, 30 MVAr and the POC has been set to 1.0 p.u. voltage. The main power 
+            transformer has also been set to auto-tap with typical settings (in lieu of actual settings), and the plant's harmonic filter is 
+            out of service.  
         </p>
 
+        <figure>
+                <img 
+                    src = "..\..\images\Model-Aggregation\Dispatch-1.png" 
+                    alt = "PowerFactory screenshot showing dispatch conditions at the POC">
+                <figcaption>Figure 4: Confirming Dispatch Conditions at the Point of Connection</figcaption>
+        </figure>
+
+        <p>
+            Now you need to identify the cables within the plant that need to be aggregated. As mentioned earlier in this post, there 
+            are a number of considerations. In this model, the elements which will be aggregated are all the lines between the 
+            low voltage side of the main power transformer, and the high voltage side of the unit transformers. 
+        </p>
+
+        <figure>
+                <img 
+                    src = "..\..\images\Model-Aggregation\Aggregate-zone-1.png" 
+                    alt = "PowerFactory screenshot showing what elements will be aggregated">
+                <figcaption>Figure 5: PowerFactory Screenshot Showing the Elements for Aggregation</figcaption>
+        </figure>
+
+        <p>
+            Next, in the flexi data
+        </p>
 
         <!-- Takeaway -->
         <section class="post-takeaway">
