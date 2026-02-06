@@ -28,7 +28,7 @@
                 Author: C. Robson · Category: Grid Connections · Published: 12 March 2026
             </p>
         </header>
-
+0
         <p>
             In this post, I will break down what model aggregation is, why it matters, and how I to do it.
             I will also dive into the assumptions used to create the model, and when these break down i.e. when
@@ -54,24 +54,31 @@
             I start by creating the disaggregated model in DIgSILENT's PowerFactory. PowerFactory is used for creating and running 
             the disaggregated model as it doesn't need OEM controllers to run. Simple active and reactive power controllers 
             can be made to control P and Q at the point of connection. After you have made the disaggregated model, it's 
-            time to decide what you are going to aggregate. Typically, the collector networks are aggregated. The number 
-            of aggregate parameters dependends on: 
-            <ul>
+            time to decide what you are going to aggregate. Typically, the collector networks are aggregated. 
+        </p>
+        
+        <p>
+            The number of aggregate parameters heavily dependends on: 
+        </p>
+            <ul class="dotpoint-list">
                 <li>Number of main power/park transformers.</li>
                 <li>Whether the site is hybrid or not.</li>
                 <li>Controller used within the park.</li>
                 <li>Size of inverter/units.</li>
             </ul> 
-        </p>
+        
 
         <p>
             Generally speaking you want to aggregate all the similar parts of the plant. You do this because when elements 
-            are similar they behave similiary and consequently your aggregate model becomes more accurate! Here are some 
-            examples of how you'd aggregate models.  
+            are similar they behave similiary and consequently your aggregate model becomes more accurate! Here is an
+            example of how you'd aggregate a simple model.  
         </p>
 
         <figure>
-                <img src="images\Model-Aggregation\" alt="Aggregating Models">
+                <img 
+                    src = "..\..\images\Model-Aggregation\Aggregation-example-1.png" 
+                    alt = "Aggregating Models">
+                <figcaption>Figure 1: Simple Aggregation Example</figcaption>
         </figure>
 
 
@@ -92,23 +99,24 @@
         </p>
 
         <p>
-            There are many different variations of aggregated models. Below are some different aggregated models that I have
-            made. A key takeaway from the aggregated models below is that three winding transformers are never aggregated into a 
-            two winding transformer. 
+            There are many different variations of aggregated models. Below are some stylised models that I have made. A key takeaway 
+            from the aggregated models below is that three winding transformers are never aggregated into a two winding transformer. 
+            There are phenomena that need to be explicitly modelled throughout the GPS process which will be lost if three winding
+            transformers are modelled at two winding transformers.  
         </p>
 
         <figure>
                 <img 
-                    src="..\..\images\Model-Aggregation\Aggregation-1.png" 
-                    alt="Aggregation variation 1">
-                <figcaption>Aggregation Variations 1 and 2</figcaption>
+                    src = "..\..\images\Model-Aggregation\Aggregation-1.png" 
+                    alt = "Aggregation variation 1">
+                <figcaption>Figure 2: Aggregation Variations 1 and 2</figcaption>
         </figure>
 
         <figure>
                 <img 
-                    src="..\..\images\Model-Aggregation\Aggregation-2.png" 
-                    alt="Aggregation variation 2">
-                <figcaption>Aggregation Variations 3 and 4</figcaption>
+                    src = "..\..\images\Model-Aggregation\Aggregation-2.png" 
+                    alt = "Aggregation variation 2">
+                <figcaption>Figure 3: Aggregation Variations 3 and 4</figcaption>
         </figure>
 
         <h2>Getting Started</h2>
@@ -117,13 +125,18 @@
             You now know why, and you know a bit about the science behind the methods used, but how do you actually aggregate a 
             model? Start by dispatching your plant. Any dispatch conditions will do but standardising is always the way to go.
             Most NSPs do not have any requirements on how to aggregate, however, PowerLink Queensland do state a few operating conditions
-            and general rules to know if you aggregation was successful. That said I aggregate my models using conditions below: 
-            <ul>
+            and general rules to know if you aggregation was successful. 
+        </p>
+
+        <p>
+            That said I aggregate my models using the conditions below: 
+        </p>
+
+            <ul class="dotpoint-list">
                 <li>Grid Voltage: 0.9 p.u., 1.0 p.u., and 1.1 p.u.</li>
                 <li>Active Power Setpoint: 0 p.u. (BESS only), 0.5 p.u., 1.0 p.u., and -1.0 p.u. (BESS only)</li>
                 <li>Reactive Power Setpoint: -1.0 p.u., 0 p.u., and 1.0 p.u.,</li>
             </ul>
-        </p>
 
         <h2>The Math</h2>
 
