@@ -28,7 +28,7 @@
                 Author: C. Robson · Category: Grid Connections · Published: 12 March 2026
             </p>
         </header>
-0
+
         <p>
             In this post, I will break down what model aggregation is, why it matters, and how I to do it.
             I will also dive into the assumptions used to create the model, and when these break down i.e. when
@@ -92,8 +92,9 @@
         </p>
 
         <p>
-            The parameters you calculate should describe how the plant will lose power through it's collector network. By
-            calculating parameters based on the losses over a number of operating conditions, you are essentially taking the 
+            This method was originally posted <a href="https://docs.nrel.gov/docs/fy06osti/38940.pdf" target="_blank">here</a>. 
+            This paper describes how the parameters you calculate should describe how the plant will lose power through it's collector network. 
+            By calculating parameters based on the losses over a number of operating conditions, you are essentially taking the 
             average of the plant's losses and calculating the resistance and reactance of a single equivalent cable. This post 
             will explain how aggregated parameters are calculated using load flows. 
         </p>
@@ -124,25 +125,34 @@
         <p>
             You now know why, and you know a bit about the science behind the methods used, but how do you actually aggregate a 
             model? Start by dispatching your plant. Any dispatch conditions will do but standardising is always the way to go.
-            Most NSPs do not have any requirements on how to aggregate, however, PowerLink Queensland do state a few operating conditions
-            and general rules to know if you aggregation was successful. 
+            Most NSPs do not have any requirements on how to aggregate, however, PowerLink Queensland do have a few operating conditions
+            and general rules that you will need to follow. That said, the below is broadly accepted across Australia. 
         </p>
 
         <p>
-            That said I aggregate my models using the conditions below: 
+            Operating conditions I use for aggregation: 
         </p>
 
             <ul class="dotpoint-list">
-                <li>Grid Voltage: 0.9 p.u., 1.0 p.u., and 1.1 p.u.</li>
-                <li>Active Power Setpoint: 0 p.u. (BESS only), 0.5 p.u., 1.0 p.u., and -1.0 p.u. (BESS only)</li>
-                <li>Reactive Power Setpoint: -1.0 p.u., 0 p.u., and 1.0 p.u.,</li>
+                <li><strong>Grid Voltage</strong>: 0.9 p.u., 1.0 p.u., and 1.1 p.u.</li>
+                <li><strong>Reactive Power Setpoint</strong>: -1.0 p.u., 0 p.u., and 1.0 p.u.,</li>
+                <li><strong>Active Power Setpoint</strong>: 0.05 p.u., 0.5 p.u., and 1.0 p.u.</li>
+                <li><strong>Active Power Setpoint (BESS)</strong>: -1.0 p.u., 0.0 p.u., and 1.0 p.u.</li>
             </ul>
 
+        <p>
+            Having other other equipment such as capacitors, filters, STATCOMS, etc in service for the aggregation is not necessary. 
+            If the aggregation is done correctly, it does not matter if they are in service or not but for consistency, I like to keep off 
+            while aggregating models. Less equipment in serivce makes it easier to isolate issues when they arise. It is, however, very 
+            important to have the main power transformers tap controller modelled. If you do not model it, you will need to pay 
+            particular attention to the tap that the loadflows are solved in so that validation of your parameters can be confirmed.
+        </p>
+        
         <h2>The Math</h2>
 
         <p>
-            Once you have run the load flow. Check the POC condition to confirm they are as you expect. If they are not, commons errors
-            are typically 
+            Once you have set up the conditions and run the load flow. Check the POC and confirm the values you are seeing are what you expect.
+
         </p>
 
 
